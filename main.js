@@ -111,8 +111,8 @@ randomColor = function(aArray){
 
 //current mouse position
 var MousePosition = function(x,y){
-  this.x = x;
-  this.y = y;
+  this.x = this.lastX = x;
+  this.y = this.lastY = y;
 };
 var mp = new MousePosition(undefined, undefined);
 
@@ -219,18 +219,22 @@ var Circle = function(x,y,r,ms,color,destinationX, destinationY, dx, dy){
   }
 
   this.follow = function(){
-    if(this.x>mp.x)this.directionX = -1;
-    else if(this.x<mp.x)this.directionX = 1;
+    let xDirection = (mp.x + mp.lastX)/2;
+    let yDirection = (mp.y + mp.lastY)/2;
+    if(this.x>xDirection)this.directionX = -1;
+    else if(this.x<xDirection)this.directionX = 1;
     else this.directionX = 0;
-    if(this.y>mp.y)this.directionY = -1;
-    else if(this.y<mp.y)this.directionY = 1;
+    if(this.y>yDirection)this.directionY = -1;
+    else if(this.y<yDirection)this.directionY = 1;
     else this.directionY = 0;
 
-    this.dx = ms * this.directionX * Math.abs(this.x-mp.x)/500;
-    this.dy = ms * this.directionY * Math.abs(this.y-mp.y)/500;
+    this.dx = ms * this.directionX * Math.abs(this.x-xDirection)/500;
+    this.dy = ms * this.directionY * Math.abs(this.y-yDirection)/500;
     this.x+=this.dx;
     this.y+=this.dy;
     this.draw();
+    mp.lastX = mp.x;
+    mp.lastY = mp.y;
   }
 
   this.flyToPoint = function(){
