@@ -23,95 +23,186 @@
       color:white;
     }
 
-    #setings-wrapper {
-      display: flex;
-      z-index: 2;
+    #settings-wrapper {
       position: fixed;
-      background: black;
-      opacity: 0.5;
-      top: 0;
-      right: 0;
-      left: 0;
-      bottom: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
     }
 
-    #setings {
-      min-width: 25%;
-      display: block;
-      background: white;
-      box-shadow:2px 2px 10px silver;
-      padding: 10px;
+    .title h2 {
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding-bottom: 10px;
+    }
+
+    .done-by {
+      color: white;
+      padding-top: 10px;
       text-align: center;
     }
 
-    #setings input
-     {
-      margin: 5px;
+    .done-by a {
+      margin-top: 5px;
+      display: inline-block;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 18px;
+      padding: 8px 14px;
+      border: 2px solid white;
+      border-radius: 14px;
+    }
+
+    #settings {
+      background: black;
+      width: 50%;
+      max-width: 450px;
+      padding: 20px 30px;
+      position: relative;
+      color: white;
+    }
+
+    #settings::before, #settings::after {
+      content: "";
+      position: absolute;
+      top: -5px; left: -5px; right: -5px; bottom: -5px;
+      background: linear-gradient(120deg, pink, blue, violet, blue, pink);
+      background-size: 400%;
+      z-index: -1;
+      animation: gradientFlow 15s linear infinite;
+    }
+
+    #settings:after {
+      filter: blur(30px);
+    }
+
+    @keyframes gradientFlow {
+      from {background-position: 0%;}
+      to {background-position: 300%;}
+    }
+
+    .settings-title {
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .key-labels, .value-labels {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .key-labels label, .value-labels label {
+      padding: 0px 5px;
+    }
+
+    .key-labels input, .value-labels input {
       width: 25px;
-      padding: 5px;
-    }
-
-    #blue {
-      border-color: #28ABCA;
-      color: #28ABCA;
-    }
-
-    #green {
-      border-color: #9CF416;
-      color: #9CF416;
-    }
-
-    #red {
-      border-color:#720118;
-      color:#720118;
+      height: 25px;
+      text-align: center;
+      line-height: 25px;
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      margin-left: 4px;
     }
 
     #save {
       cursor: pointer;
-      border: none;
+      margin: 0px auto;
+      display: block;
       color: white;
-      background: black;
-      padding: 5px;
-      margin: 5px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 18px;
+      padding: 8px 14px;
+      border: 2px solid white;
+      border-radius: 14px;
+      background: transparent;
+      min-width: 150px;
+      margin-top: 30px;
+    }
+
+    .legend-modal {
+      display: none;
     }
   </style>
   <title>Follow Balls</title>
 </head>
 <body>
+
   <div id="info">
     <div id="gravitation">gravitation: off</div>
     <div id="rozproszenie">rozproszenie: off</div>
   </div>
+
   <canvas id="main-canvas"></canvas>
-  <div id="setings-wrapper">
-    <div id="setings">
+
+  <div id="settings-wrapper">
+
+    <div class="title">
       <h2>Follow Balls</h2>
-      <h5>By Simpsonphile</h5>
-      <label for="red">Key for red
-        <input type="text" id="red" maxlength="1" placeholder='n'>
-      </label
-      <label for="green">Key for green
-        <input type="text" id="green" maxlength="1" placeholder="m">
-      </label
-      <label for="blue">Key for blue
-        <input type="text" id="blue" maxlength="1" placeholder="b" >
-      </label><br>
-      <label for="min-size">min-size
-        <input type="number" id="min-size" min=0 max=25 value="2">
-      </label>
-      <label for="max-size">max-size
-        <input type="number" id="max-size" min=0 max=25 value="8">
-      </label><br>
-      <label for="min-speed">min-speed
-        <input type="number" id="min-speed" min=0 max=25 value="2">
-      </label>
-      <label for="max-size">max-size
-        <input type="number" id="max-speed" min=0 max=25 value="8">
-      </label><br>
-      <button id='save'>Save/exit</button>
-      <p>R: RESTART, S:SETINGS,<br> G:GRAVITATION, H:ROZPROSZENIE, Q: EXPLODE</p>
+    </div>
+
+    <div id="settings">
+      <div class="settings-title">
+        <h3>Settings</h3>
+      </div>
+
+      <div class="key-labels">
+        <label for="red">first color:
+          <input type="text" id="red" maxlength="1" placeholder='n'>
+        </label>
+        <label for="green">second color:
+          <input type="text" id="green" maxlength="1" placeholder="m">
+        </label>
+        <label for="blue">third color:
+          <input type="text" id="blue" maxlength="1" placeholder="b" >
+        </label>
+      </div>
+
+      <div class="value-labels">
+        <label for="min-size">min particle size:
+          <input type="number" id="min-size" min=0 max=25 value="2">
+        </label>
+        <label for="max-size">max particle size:
+          <input type="number" id="max-size" min=0 max=25 value="8">
+        </label>
+      </div>
+
+      <div class="value-labels">
+        <label for="min-speed">min particle speed:
+          <input type="number" id="min-speed" min=0 max=25 value="2">
+        </label>
+        <label for="max-size">max particle speed:
+          <input type="number" id="max-speed" min=0 max=25 value="8">
+        </label>
+      </div>
+
+
+      <button id='save'>Play</button>
+
+      <div class="legend-modal">
+        <div class="settings-title">
+          <h3>Instuction</h3>
+        </div>
+
+        <div class="legenda">
+          <p>R: restart game</p>
+          <p>S: show settings</p>
+          <p>G: toggle gravitation</p>
+          <p>H: toggle rozproszenie</p>
+          <p>Q: shot fireworks</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="done-by">
+      <p>developed by</p> <a href="https://simpsonphile.github.io">Dawid Mazewski</a>
     </div>
   </div>
   <script src="main.js" charset="utf-8"></script>

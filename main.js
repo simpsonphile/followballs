@@ -49,32 +49,32 @@ var circlesToPointExploders = [];
 var circlesFromExplosion = [];
 
 //modal that changes variables
-var modal = document.querySelector('#setings-wrapper');
-var setingsSave = document.querySelector('#save');
-var setingsBlue = document.querySelector('#blue');
-var setingsGreen = document.querySelector('#green');
-var setingsRed = document.querySelector('#red');
-var setingsMinSize = document.querySelector('#min-size');
-var setingsMaxSize = document.querySelector('#max-size');
-var setingsMinSpeed = document.querySelector('#min-speed');
-var setingsMaxSpeed = document.querySelector('#max-speed');
+var modal = document.querySelector('#settings-wrapper');
+var settingsSave = document.querySelector('#save');
+var settingsBlue = document.querySelector('#blue');
+var settingsGreen = document.querySelector('#green');
+var settingsRed = document.querySelector('#red');
+var settingsMinSize = document.querySelector('#min-size');
+var settingsMaxSize = document.querySelector('#max-size');
+var settingsMinSpeed = document.querySelector('#min-speed');
+var settingsMaxSpeed = document.querySelector('#max-speed');
 
-setingsSave.addEventListener('click', function(){
-  if(setingsBlue.value && setingsBlue.value && setingsBlue.value!=setingsGreen.value
-     && setingsBlue.value!=setingsRed.value){
-       blueKey=setingsBlue.value;
-       if(setingsGreen.value && setingsRed.value!=setingsGreen.value){
-         greenKey=setingsGreen.value;
-         if(setingsRed.value){
-           redKey=setingsRed.value;
+settingsSave.addEventListener('click', function(){
+  if(settingsBlue.value && settingsBlue.value && settingsBlue.value!=settingsGreen.value
+     && settingsBlue.value!=settingsRed.value){
+       blueKey=settingsBlue.value;
+       if(settingsGreen.value && settingsRed.value!=settingsGreen.value){
+         greenKey=settingsGreen.value;
+         if(settingsRed.value){
+           redKey=settingsRed.value;
          }
        }
      }
 
-  aMinSize=Number(setingsMinSize.value);
-  aMaxSize=Number(setingsMaxSize.value);
-  aMinSpeed=Number(setingsMinSpeed.value);
-  aMaxSpeed=Number(setingsMaxSpeed.value);
+  aMinSize=Number(settingsMinSize.value);
+  aMaxSize=Number(settingsMaxSize.value);
+  aMinSpeed=Number(settingsMinSpeed.value);
+  aMaxSpeed=Number(settingsMaxSpeed.value);
 
   if(aMinSize<=aMaxSize && aMinSize>0){
     minSize=aMinSize;
